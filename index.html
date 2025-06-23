@@ -11,7 +11,7 @@
       padding: 0;
       box-sizing: border-box;
     }
-    
+
     html, body {
       height: 100%;
       font-family: 'Bebas Neue', cursive;
@@ -120,6 +120,41 @@
       text-align: right;
     }
 
+    .quote-section {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    .quote-section .quote-container {
+      max-width: 80%;
+    }
+
+    .quote-section .quote-title {
+      font-size: 2rem;
+      font-weight: normal;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+
+    .quote-section .quote-text {
+      font-size: 1.5rem;
+      font-weight: normal;
+      letter-spacing: 0.1em;
+      line-height: 1.2;
+    }
+
+    .quote-section .quote-author {
+      font-size: 1.1rem;
+      font-weight: normal;
+      letter-spacing: 0.2em;
+      line-height: 1.2;
+      padding-top: 1rem;
+    }
+
     .dating-section {
       flex: 1;
       display: flex;
@@ -145,190 +180,220 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="top-section">
-      <div class="time-section">
-        <div class="location">
-          <div class="location-name">VIETNAM</div>
-          <div class="time" id="vietnam-time"></div>
-        </div>
-        <div class="location">
-          <div class="location-name">BERLIN</div>
-          <div class="time" id="berlin-time"></div>
-        </div>
+<div class="container">
+  <div class="top-section">
+    <div class="time-section">
+      <div class="location">
+        <div class="location-name">VIETNAM</div>
+        <div class="time" id="vietnam-time"></div>
       </div>
-      <div class="weather-section">
-        <div class="title">HANOI WEATHER</div>
-        <div class="current-weather" id="current-weather">
-          <div class="current-label">CURRENT</div>
-          <div class="current-temp" id="current-temp"></div>
-          <div class="current-description" id="current-description"></div>
-        </div>
-        <div class="forecast-section">
-          <div class="forecast-label">7-DAY FORECAST</div>
-          <div id="forecast"></div>
-        </div>
+      <div class="location">
+        <div class="location-name">BERLIN</div>
+        <div class="time" id="berlin-time"></div>
       </div>
     </div>
-    <div class="dating-section">
-      <div>
-        <div class="title">DATING YOUR NERD FOR:</div>
-        <div class="duration" id="dating-duration"></div>
+    <div class="weather-section">
+      <div class="title">HANOI WEATHER</div>
+      <div class="current-weather" id="current-weather">
+        <div class="current-label">CURRENT</div>
+        <div class="current-temp" id="current-temp"></div>
+        <div class="current-description" id="current-description"></div>
+      </div>
+      <div class="forecast-section">
+        <div class="forecast-label">7-DAY FORECAST</div>
+        <div id="forecast"></div>
       </div>
     </div>
   </div>
+  <div class="quote-section">
+    <div class="quote-container">
+      <div class="quote-title">QUOTE OF THE DAY</div>
+      <div class="quote-text" id="quote-text"></div>
+      <div class="quote-author" id="quote-author"></div>
+    </div>
+  </div>
+  <div class="dating-section">
+    <div>
+      <div class="title">DATING YOUR NERD FOR:</div>
+      <div class="duration" id="dating-duration"></div>
+    </div>
+  </div>
+</div>
 
-  <script>
-    const weatherCodeMap = {
-      0: "Clear sky",
-      1: "Mainly clear",
-      2: "Partly cloudy",
-      3: "Overcast",
-      45: "Fog",
-      48: "Depositing rime fog",
-      51: "Light drizzle",
-      53: "Moderate drizzle",
-      55: "Dense drizzle",
-      56: "Light freezing drizzle",
-      57: "Dense freezing drizzle",
-      61: "Slight rain",
-      63: "Moderate rain",
-      65: "Heavy rain",
-      66: "Light freezing rain",
-      67: "Heavy freezing rain",
-      71: "Slight snow fall",
-      73: "Moderate snow fall",
-      75: "Heavy snow fall",
-      77: "Snow grains",
-      80: "Slight rain showers",
-      81: "Moderate rain showers",
-      82: "Violent rain showers",
-      85: "Slight snow showers",
-      86: "Heavy snow showers",
-      95: "Thunderstorm",
-      96: "Thunderstorm with slight hail",
-      99: "Thunderstorm with heavy hail",
-    };
 
-    function updateTime() {
-      const now = new Date();
-      
-      const vietnamTime = now.toLocaleTimeString("en-US", {
-        timeZone: "Asia/Ho_Chi_Minh",
-        hour12: false,
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-      });
-      
-      const berlinTime = now.toLocaleTimeString("en-US", {
-        timeZone: "Europe/Berlin",
-        hour12: false,
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-      });
-      
-      document.getElementById("vietnam-time").textContent = vietnamTime;
-      document.getElementById("berlin-time").textContent = berlinTime;
+
+<script>
+  const weatherCodeMap = {
+    0: "Clear sky",
+    1: "Mainly clear",
+    2: "Partly cloudy",
+    3: "Overcast",
+    45: "Fog",
+    48: "Depositing rime fog",
+    51: "Light drizzle",
+    53: "Moderate drizzle",
+    55: "Dense drizzle",
+    56: "Light freezing drizzle",
+    57: "Dense freezing drizzle",
+    61: "Slight rain",
+    63: "Moderate rain",
+    65: "Heavy rain",
+    66: "Light freezing rain",
+    67: "Heavy freezing rain",
+    71: "Slight snow fall",
+    73: "Moderate snow fall",
+    75: "Heavy snow fall",
+    77: "Snow grains",
+    80: "Slight rain showers",
+    81: "Moderate rain showers",
+    82: "Violent rain showers",
+    85: "Slight snow showers",
+    86: "Heavy snow showers",
+    95: "Thunderstorm",
+    96: "Thunderstorm with slight hail",
+    99: "Thunderstorm with heavy hail",
+  };
+
+  function updateTime() {
+    const now = new Date();
+
+    const vietnamTime = now.toLocaleTimeString("en-US", {
+      timeZone: "Asia/Ho_Chi_Minh",
+      hour12: false,
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+
+    const berlinTime = now.toLocaleTimeString("en-US", {
+      timeZone: "Europe/Berlin",
+      hour12: false,
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+
+    document.getElementById("vietnam-time").textContent = vietnamTime;
+    document.getElementById("berlin-time").textContent = berlinTime;
+  }
+
+  function calculateDuration() {
+    const startDate = new Date("2020-08-16");
+    const currentDate = new Date();
+
+    let years = currentDate.getFullYear() - startDate.getFullYear();
+    let months = currentDate.getMonth() - startDate.getMonth();
+    let days = currentDate.getDate() - startDate.getDate();
+
+    if (days < 0) {
+      months--;
+      const lastMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
+      days += lastMonth.getDate();
     }
 
-    function calculateDuration() {
-      const startDate = new Date("2020-08-16");
-      const currentDate = new Date();
-      
-      let years = currentDate.getFullYear() - startDate.getFullYear();
-      let months = currentDate.getMonth() - startDate.getMonth();
-      let days = currentDate.getDate() - startDate.getDate();
-      
-      if (days < 0) {
-        months--;
-        const lastMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
-        days += lastMonth.getDate();
-      }
-      
-      if (months < 0) {
-        years--;
-        months += 12;
-      }
-      
-      document.getElementById("dating-duration").textContent = 
-        `${years} YEAR${years !== 1 ? "S" : ""}, ${months} MONTH${months !== 1 ? "S" : ""}, ${days} DAY${days !== 1 ? "S" : ""}`;
+    if (months < 0) {
+      years--;
+      months += 12;
     }
 
-    function formatDate(dateStr) {
-      const date = new Date(dateStr);
-      return date.toLocaleDateString("en-US", {
-        weekday: "short",
-        month: "short",
-        day: "numeric",
+    document.getElementById("dating-duration").textContent =
+            `${years} YEAR${years !== 1 ? "S" : ""}, ${months} MONTH${months !== 1 ? "S" : ""}, ${days} DAY${days !== 1 ? "S" : ""}`;
+  }
+
+  function formatDate(dateStr) {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString("en-US", {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+    });
+  }
+
+  async function fetchWeather() {
+    try {
+      const response = await fetch(
+              "https://api.open-meteo.com/v1/forecast?latitude=21.0245&longitude=105.8412&hourly=temperature_2m,weather_code&current=rain&timezone=Asia%2FBangkok"
+      );
+      const data = await response.json();
+
+      // Update current weather
+      document.getElementById("current-temp").textContent = `${Math.round(data.hourly.temperature_2m[0])}°C`;
+      document.getElementById("current-description").textContent =
+              weatherCodeMap[data.hourly.weather_code[0]] || "Unknown";
+
+      // Process hourly data into daily forecasts
+      const dailyData = {};
+      data.hourly.time.forEach((time, index) => {
+        const date = time.split("T")[0];
+        if (!dailyData[date]) {
+          dailyData[date] = { temps: [], codes: [] };
+        }
+        dailyData[date].temps.push(data.hourly.temperature_2m[index]);
+        dailyData[date].codes.push(data.hourly.weather_code[index]);
       });
-    }
 
-    async function fetchWeather() {
-      try {
-        const response = await fetch(
-          "https://api.open-meteo.com/v1/forecast?latitude=21.0245&longitude=105.8412&hourly=temperature_2m,weather_code&current=rain&timezone=Asia%2FBangkok"
-        );
-        const data = await response.json();
+      const forecasts = Object.entries(dailyData)
+              .slice(0, 7)
+              .map(([date, data], index) => {
+                const minTemp = Math.min(...data.temps);
+                const maxTemp = Math.max(...data.temps);
+                const mostCommonCode = data.codes
+                        .sort((a, b) => data.codes.filter(v => v === a).length - data.codes.filter(v => v === b).length)
+                        .pop() || 0;
 
-        // Update current weather
-        document.getElementById("current-temp").textContent = `${Math.round(data.hourly.temperature_2m[0])}°C`;
-        document.getElementById("current-description").textContent = 
-          weatherCodeMap[data.hourly.weather_code[0]] || "Unknown";
+                return {
+                  date,
+                  minTemp: Math.round(minTemp),
+                  maxTemp: Math.round(maxTemp),
+                  weatherCode: mostCommonCode,
+                  weatherDescription: weatherCodeMap[mostCommonCode] || "Unknown",
+                };
+              });
 
-        // Process hourly data into daily forecasts
-        const dailyData = {};
-        data.hourly.time.forEach((time, index) => {
-          const date = time.split("T")[0];
-          if (!dailyData[date]) {
-            dailyData[date] = { temps: [], codes: [] };
-          }
-          dailyData[date].temps.push(data.hourly.temperature_2m[index]);
-          dailyData[date].codes.push(data.hourly.weather_code[index]);
-        });
-
-        const forecasts = Object.entries(dailyData)
-          .slice(0, 7)
-          .map(([date, data], index) => {
-            const minTemp = Math.min(...data.temps);
-            const maxTemp = Math.max(...data.temps);
-            const mostCommonCode = data.codes
-              .sort((a, b) => data.codes.filter(v => v === a).length - data.codes.filter(v => v === b).length)
-              .pop() || 0;
-
-            return {
-              date,
-              minTemp: Math.round(minTemp),
-              maxTemp: Math.round(maxTemp),
-              weatherCode: mostCommonCode,
-              weatherDescription: weatherCodeMap[mostCommonCode] || "Unknown",
-            };
-          });
-
-        // Update forecast display
-        const forecastContainer = document.getElementById("forecast");
-        forecastContainer.innerHTML = forecasts.map((forecast, index) => `
+      // Update forecast display
+      const forecastContainer = document.getElementById("forecast");
+      forecastContainer.innerHTML = forecasts.map((forecast, index) => `
           <div class="forecast-item">
             <span class="date">${index === 0 ? "TODAY" : formatDate(forecast.date)}</span>
             <span class="description">${forecast.weatherDescription.toUpperCase()}</span>
             <span class="temps">${forecast.maxTemp}°/${forecast.minTemp}°</span>
           </div>
         `).join("");
-      } catch (error) {
-        console.error("Failed to fetch weather data:", error);
-      }
+    } catch (error) {
+      console.error("Failed to fetch weather data:", error);
     }
+  }
 
-    // Initialize
-    updateTime();
-    calculateDuration();
-    fetchWeather();
+  async function fetchQuote() {
+    try {
+      const response = await fetch("https://n8n.excelogy.net/webhook/5ba639e5-e332-45f1-8924-ace5076f4046");
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      const quote = data;
+      document.getElementById("quote-text").textContent = `"${quote.q}"`;
+      document.getElementById("quote-author").textContent = `${quote.a}`;
+    } catch (error) {
+      console.error("Failed to fetch quote:", error);
+      document.getElementById("quote-text").textContent = "Unable to load quote.";
+      document.getElementById("quote-author").textContent = ``;
 
-    // Set intervals
-    setInterval(updateTime, 1000);
-    setInterval(calculateDuration, 1000 * 60 * 60);
-    setInterval(fetchWeather, 1000 * 60 * 30);
-  </script>
+    }
+  }
+
+  // Initialize
+  updateTime();
+  calculateDuration();
+  fetchWeather();
+  fetchQuote();
+
+  // Set intervals
+  setInterval(updateTime, 1000);
+  setInterval(calculateDuration, 1000 * 60 * 60);
+  setInterval(fetchWeather, 1000 * 60 * 30);
+  setInterval(fetchQuote, 1000 * 60 * 60 * 24);
+
+</script>
 </body>
 </html>
